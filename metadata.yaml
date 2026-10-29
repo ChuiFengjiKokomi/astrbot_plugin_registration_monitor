@@ -1,0 +1,11 @@
+name: astrbot_plugin_registration_monitor
+display_name: 赛事报名监控
+desc: 监控兼容 JSON 接口的学校新增及取消报名，向指定QQ群播报变化、目标学校和关注位次，支持手动查询与播报。
+version: v1.0.0
+# PUBLISH-1：作者署名；维护自己的分支时按需更新。
+author: ChuiFengjiKokomi
+# LINK-3：GitHub 仓库链接；发布自己的仓库时修改，改名后同步修改上方 name。
+repo: "https://github.com/ChuiFengjiKokomi/astrbot_plugin_registration_monitor"
+astrbot_version: ">=4.9.2,<5"
+support_platforms:
+  - aiocqhttp

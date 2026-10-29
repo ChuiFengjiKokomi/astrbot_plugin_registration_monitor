@@ -1,0 +1,71 @@
+{
+  "enabled": {
+    "description": "启用报名变化自动监控",
+    "type": "bool",
+    "default": true,
+    "hint": "填写 api_url 和 group_ids 后开始监控。关闭后仍支持手动查询和播报。保存设置后重载插件生效。"
+  },
+  "event_name": {
+    "description": "赛事名称（播报标题）",
+    "type": "string",
+    "default": "赛事",
+    "hint": "例如 ICPC 某某站。只影响消息标题，不改变接口解析规则。"
+  },
+  "api_url": {
+    "description": "【LINK-1 必填】报名排名 JSON 接口链接",
+    "type": "string",
+    "default": "",
+    "hint": "在这里填写实际接口的 HTTP/HTTPS 地址，不是报名网页。接口格式见 README。发布者若要预设站点，可修改本项 default。更换接口会重新建立基线，并清除旧接口待发消息。"
+  },
+  "page_url": {
+    "description": "【LINK-2 可选】播报中的来源页面链接",
+    "type": "string",
+    "default": "",
+    "hint": "填写供用户打开的报名网页，作为消息底部的来源链接；留空则隐藏。不会自动从 api_url 推导，也不会用于抓取数据。发布者可修改本项 default 预设来源。"
+  },
+  "target_school": {
+    "description": "目标学校",
+    "type": "string",
+    "default": "",
+    "hint": "填写完整中文校名、英文校名或学校 ID。忽略空白、大小写和全半角差异，不做简称或模糊匹配。不在接口名单时无法获取该校网络赛排名。"
+  },
+  "group_ids": {
+    "description": "接收播报的QQ群号列表",
+    "type": "list",
+    "default": [],
+    "hint": "每项一个纯数字QQ群号，机器人须加入这些群，并通过 OneBot v11 连接。无需群内绑定。请在运行时设置，公开发布的默认值建议保持为空。"
+  },
+  "platform_id": {
+    "description": "OneBot v11 平台实例 ID（单个连接可留空）",
+    "type": "string",
+    "default": "",
+    "hint": "多个连接时填写 AstrBot 消息平台配置中的实例 ID，不是机器人QQ号，也不是 aiocqhttp。"
+  },
+  "check_interval_seconds": {
+    "description": "检查间隔（秒）",
+    "type": "int",
+    "default": 300,
+    "hint": "每轮请求结束后等待，最低60秒。默认5分钟。",
+    "slider": {"min": 60, "max": 3600, "step": 60}
+  },
+  "cutoff_position": {
+    "description": "关注的报名位次",
+    "type": "int",
+    "default": 95,
+    "hint": "按网络赛排名升序排列后的第 N 所学校。同名次沿用接口顺序。",
+    "slider": {"min": 1, "max": 300, "step": 1}
+  },
+  "notify_on_first_run": {
+    "description": "首次建立基线时播报现有全部学校",
+    "type": "bool",
+    "default": false,
+    "hint": "默认首次只建立基线，之后有新增或取消才通知。开启可能产生多条消息。已有基线时修改本项不会重播历史报名。"
+  },
+  "request_timeout": {
+    "description": "接口请求超时（秒）",
+    "type": "int",
+    "default": 60,
+    "hint": "请求或解析失败时保留原基线，下轮重试。",
+    "slider": {"min": 5, "max": 120, "step": 5}
+  }
+}
